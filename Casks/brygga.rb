@@ -23,8 +23,13 @@ cask "brygga" do
   caveats <<~EOS
     Brygga is ad-hoc signed, not notarized by Apple. On first launch macOS
     will say the app can't be verified. Right-click (or Ctrl-click) → Open
-    → confirm. If Gatekeeper still refuses, strip the quarantine attribute:
+    → confirm. If Gatekeeper still refuses, strip the quarantine attribute
+    once and launch again:
 
       xattr -cr /Applications/Brygga.app
+
+    Homebrew deliberately does not strip the attribute for you — that would
+    silently bypass a macOS security check on your behalf. Running it
+    yourself is a conscious one-time opt-in.
   EOS
 end
