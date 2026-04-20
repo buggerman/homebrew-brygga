@@ -4,17 +4,32 @@ Homebrew tap for [Brygga](https://github.com/buggerman/Brygga) — a native macO
 
 ## Install
 
+Stable (recommended):
+
 ```sh
 brew install --cask buggerman/brygga/brygga
 ```
 
-The first component (`buggerman/brygga`) is the tap; `brew` expands it to this repository. From then on `brew upgrade` picks up new Brygga releases with the rest of your tree.
+Nightly (rolling, rebuilt on every push to main):
+
+```sh
+brew install --cask buggerman/brygga/brygga@nightly
+```
+
+The first component (`buggerman/brygga`) is the tap; `brew` expands it to this repository. From then on `brew upgrade` picks up new Brygga releases with the rest of your tree — for `brygga@nightly`, Homebrew compares the release's build number on GitHub against the installed version and offers an upgrade when the nightly rolls.
 
 If you prefer to tap first and install separately:
 
 ```sh
 brew tap buggerman/brygga
-brew install --cask brygga
+brew install --cask brygga             # stable
+brew install --cask brygga@nightly     # nightly
+```
+
+The two casks install to the same `/Applications/Brygga.app`, so they're mutually exclusive — Homebrew will refuse to install one while the other is present. To switch tracks, uninstall first:
+
+```sh
+brew uninstall --cask brygga && brew install --cask brygga@nightly
 ```
 
 ## First-launch caveat
@@ -43,7 +58,8 @@ brew uninstall --cask --zap brygga      # also removes ~/Library/Application Sup
 
 ## Release channels
 
-This tap tracks the **stable** Brygga channel — cask bumps happen automatically when a new `v*` tag is published in the [main Brygga repository](https://github.com/buggerman/Brygga). For the rolling nightly build, download the DMG directly from [`releases/tag/nightly`](https://github.com/buggerman/Brygga/releases/tag/nightly).
+- **`brygga`** — stable. Follows `v*` tags in the [main Brygga repository](https://github.com/buggerman/Brygga). The cask's `version` and `sha256` are bumped automatically when a new tag is pushed.
+- **`brygga@nightly`** — rolling. Always points at the `nightly` tag, which is deleted and recreated on every push to main. The cask uses `sha256 :no_check` because the DMG changes bytes on every push; Homebrew detects new builds via `brew livecheck` against the GitHub Releases API (it reads the build number out of the release title).
 
 ## License
 
