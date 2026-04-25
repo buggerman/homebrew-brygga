@@ -1,6 +1,6 @@
 cask "brygga" do
-  version "0.1.4"
-  sha256 "2700691ff5b50d6d13263787ec4d235926b46fcc60bb16e16bb19153aaf95dc1"
+  version "0.1.4-1"
+  sha256 "b1ad485babc4c394d26742589cd80a4a35df07775c7d484de9e4bc230efd944b"
 
   url "https://github.com/buggerman/Brygga/releases/download/v#{version}/Brygga-v#{version}.dmg"
   name "Brygga"
